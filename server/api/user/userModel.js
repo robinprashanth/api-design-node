@@ -13,13 +13,24 @@ var UserSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  email: String,
+  firstName: String,
+  lastName: String,
+  provider: String,
+  facebook: {},
+  twitter: {},
+  github: {},
+  createdDate: { type: Date, default: Date.now },
+  updatedDate: { type: Date, default: Date.now },
+  followers: [{type: Schema.ObjectId, ref: 'user'}],
+  following: [{type: Schema.ObjectId, ref: 'user'}],
+  tweets: Number,
+  active: { type: Boolean, default: true}
 });
 
 UserSchema.pre('save', function(next) {
   if (!this.isModified('password')) return next();
-
-
   this.password = this.encryptPassword(this.password);
   next();
 })
@@ -43,7 +54,15 @@ UserSchema.methods = {
     var obj = this.toObject()
     delete obj.password;
     return obj;
-  }
+  },
+  follow: function(id) {
+    if (this.following.indexOf(id) === -1) {
+      this.following.push(id);
+    } else {
+      this.following.splice(this.following.indexOf(id), 1);
+    }
+    console.log(this.following);
+  },
 };
 
 

@@ -18,4 +18,10 @@ router.route('/:id')
   .put(checkUser, controller.put)
   .delete(checkUser, controller.delete)
 
+  router.route('/followers')
+  .get(controller.getfollowers)
+
+  router.route('/following')
+  .get(controller.getfollowing)
+
 module.exports = router;
