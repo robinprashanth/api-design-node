@@ -55,13 +55,15 @@ UserSchema.methods = {
     delete obj.password;
     return obj;
   },
-  follow: function(id) {
+  followUser: function(id) {
     if (this.following.indexOf(id) === -1) {
       this.following.push(id);
+      return true;
     } else {
       this.following.splice(this.following.indexOf(id), 1);
+      return true;
     }
-    console.log(this.following);
+    // console.log(this.following);
   },
 };
 

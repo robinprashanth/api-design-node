@@ -23,5 +23,7 @@ router.route('/:id')
 
   router.route('/following')
   .get(controller.getfollowing)
+  router.route('/followUser')
+  .post(checkUser,controller.followUser)
 
 module.exports = router;

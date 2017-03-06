@@ -102,3 +102,11 @@ exports.getfollowing = function (req, res, next) {
       next(err);
     });
 };
+
+exports.followUser = function (req, res, next) {
+  var response = {};
+  if (user.follow(req.followid)) {
+    response.success = 1;
+    res.json(response);
+  }
+};
